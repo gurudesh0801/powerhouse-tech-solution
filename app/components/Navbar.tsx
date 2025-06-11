@@ -6,7 +6,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 
 // Smooth-scroll navigation links pointing to section IDs
 const navLinks = [
-  { label: "Home", href: "#home" },
+  { label: "Home", href: "/" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
   { label: "Portfolio", href: "#portfolio" },
@@ -38,7 +38,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
         <a
-          href="#home"
+          href="/"
           className="text-2xl font-bold text-blue-600 tracking-tight hover:opacity-90 transition duration-300"
         >
           <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-transparent bg-clip-text">

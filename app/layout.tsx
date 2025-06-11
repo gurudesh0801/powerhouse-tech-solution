@@ -1,6 +1,7 @@
 // app/layout.tsx
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import ScrollToTopButton from "./components/ScrollToTopButton";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -20,7 +21,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar /> {/* Add Navbar here */}
-        <main>{children}</main> {/* Add top padding */}
+        <ScrollToTopButton />
+        <main className="pt-16">{children}</main> {/* Add top padding */}
         <Footer />
       </body>
     </html>
