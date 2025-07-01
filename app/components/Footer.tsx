@@ -1,126 +1,229 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { FiMapPin, FiMail, FiPhone } from "react-icons/fi";
 import {
-  FiMail,
-  FiPhone,
-  FiMapPin,
-  FiFacebook,
-  FiTwitter,
-  FiLinkedin,
-  FiInstagram,
-} from "react-icons/fi";
+  FaLinkedin,
+  FaTwitter,
+  FaInstagram,
+  FaFacebookF,
+} from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-20 pb-10">
-      <div className="max-w-6xl mx-auto px-4">
-        {/* Top Footer */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="grid md:grid-cols-4 sm:grid-cols-2 gap-8 mb-16"
-        >
-          {/* Column 1 - Logo & Summary */}
-          <div>
-            <h3 className="text-2xl font-bold text-white">
-              Powerhouse Tech Solutions
-            </h3>
-            <p className="mt-4 text-sm text-gray-400">
-              Delivering innovative, scalable, and future-ready IT solutions to
-              help businesses thrive in a digital world.
-            </p>
-          </div>
+    <footer className="relative bg-[#fff2e4] pt-16 pb-8 overflow-hidden border-t border-amber-100">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-20 -left-20 w-64 h-64 bg-amber-500 rounded-full blur-[80px] opacity-30"></div>
+        <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-yellow-500 rounded-full blur-[100px] opacity-20"></div>
+      </div>
 
-          {/* Column 2 - Contact Info */}
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-4">
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-3 gap-12 mb-12">
+          {/* Contact Column */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+              <span className="w-3 h-3 bg-amber-500 rounded-full"></span>
               Contact Us
-            </h4>
-            <p className="flex items-start gap-2 mb-3">
-              <FiMail className="mt-1 text-blue-400" /> hello@powerhouse.tech
-            </p>
-            <p className="flex items-start gap-2 mb-3">
-              <FiPhone className="mt-1 text-blue-400" /> +91 87880 98130 / 86684
-              94091
-            </p>
-            <p className="flex items-start gap-2">
-              <FiMapPin className="mt-1 text-blue-400" />
-              Pune, Maharashtra, India
-            </p>
-          </div>
+            </h3>
 
-          {/* Column 3 - Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-4">
+            <div className="space-y-3">
+              <div className="flex items-start gap-3">
+                <FiMapPin className="text-amber-600 mt-1" />
+                <p className="text-gray-700">Pune, Maharashtra, India</p>
+              </div>
+              <div className="flex items-start gap-3">
+                <FiMail className="text-amber-600 mt-1" />
+                <a
+                  href="mailto:com.projectpowerhouse@gmail.com"
+                  className="text-gray-700 hover:text-amber-600 transition"
+                >
+                  com.projectpowerhouse@gmail.com
+                </a>
+              </div>
+              <div className="flex items-start gap-3">
+                <FiPhone className="text-amber-600 mt-1" />
+                <p className="text-gray-700">+91 87880 98130</p>
+              </div>
+            </div>
+
+            {/* Mini Map */}
+            <div className="mt-6 rounded-xl overflow-hidden border border-amber-200 shadow-sm h-40">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7512.456317107!2d73.80597215!3d18.452682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2eabb0e6e5b0b%3A0x1234567890abcdef!2sAbasaheb%20Raikar%20Nagar%2C%20Dhayari%2C%20Pune%2C%20Maharashtra%20411041!5e0!3m2!1sen!2sin!4v1720119584325!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                className="grayscale hover:grayscale-0 transition-all duration-500"
+              />
+            </div>
+          </motion.div>
+
+          {/* Quick Links Column */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+              <span className="w-3 h-3 bg-amber-500 rounded-full"></span>
               Quick Links
-            </h4>
-            <ul className="space-y-3 text-sm">
-              <li>
-                <a href="#about" className="hover:text-white transition">
-                  About
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="hover:text-white transition">
-                  Services
-                </a>
-              </li>
-              <li>
-                <a href="#portfolio" className="hover:text-white transition">
-                  Portfolio
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="hover:text-white transition">
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
+            </h3>
 
-          {/* Column 4 - Social Media */}
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Follow Us</h4>
-            <div className="flex space-x-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-3">
+                <h4 className="font-medium text-gray-800">Company</h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li>
+                    <a href="#" className="hover:text-amber-600 transition">
+                      About
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-amber-600 transition">
+                      Services
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-amber-600 transition">
+                      Portfolio
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-amber-600 transition">
+                      Careers
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="space-y-3">
+                <h4 className="font-medium text-gray-800">Support</h4>
+                <ul className="space-y-2 text-gray-700">
+                  <li>
+                    <a href="#" className="hover:text-amber-600 transition">
+                      Contact
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-amber-600 transition">
+                      FAQs
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:text-amber-600 transition">
+                      Help Center
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Policies Column */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="space-y-4"
+          >
+            <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+              <span className="w-3 h-3 bg-amber-500 rounded-full"></span>
+              Policies
+            </h3>
+
+            <div className="space-y-3">
               <a
-                href="https://facebook.com"
-                target="_blank"
-                className="hover:text-white"
+                href="#"
+                className="block p-4 bg-white rounded-lg border border-amber-100 hover:border-amber-300 transition group"
               >
-                <FiFacebook size={20} />
+                <h4 className="font-medium text-gray-800 group-hover:text-amber-600 transition">
+                  Terms & Conditions
+                </h4>
+                <p className="text-sm text-gray-600 mt-1">
+                  Read our terms of service and legal policies
+                </p>
               </a>
+
               <a
-                href="https://twitter.com"
-                target="_blank"
-                className="hover:text-white"
+                href="#"
+                className="block p-4 bg-white rounded-lg border border-amber-100 hover:border-amber-300 transition group"
               >
-                <FiTwitter size={20} />
+                <h4 className="font-medium text-gray-800 group-hover:text-amber-600 transition">
+                  Privacy Policy
+                </h4>
+                <p className="text-sm text-gray-600 mt-1">
+                  How we collect and protect your data
+                </p>
               </a>
+
               <a
-                href="https://www.linkedin.com/company/projectpowerhouse/"
-                target="_blank"
-                className="hover:text-white"
+                href="#"
+                className="block p-4 bg-white rounded-lg border border-amber-100 hover:border-amber-300 transition group"
               >
-                <FiLinkedin size={20} />
-              </a>
-              <a
-                href="https://www.instagram.com/projectpowerhouseofficial/"
-                target="_blank"
-                className="hover:text-white"
-              >
-                <FiInstagram size={20} />
+                <h4 className="font-medium text-gray-800 group-hover:text-amber-600 transition">
+                  Refund Policy
+                </h4>
+                <p className="text-sm text-gray-600 mt-1">
+                  Our policies regarding payments and refunds
+                </p>
               </a>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
-        {/* Bottom Footer */}
-        <div className="border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
-          &copy; {new Date().getFullYear()} Powerhouse Tech Solutions. All
-          rights reserved.
+        {/* Bottom Section */}
+        <div className="border-t border-amber-700 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            {/* Social Links */}
+            <div className="flex items-center gap-4">
+              <a
+                href="#"
+                className="w-10 h-10 rounded-full bg-white border border-amber-200 flex items-center justify-center text-amber-600 hover:bg-amber-100 transition"
+              >
+                <FaFacebookF />
+              </a>
+              <a
+                href="#"
+                className="w-10 h-10 rounded-full bg-white border border-amber-200 flex items-center justify-center text-amber-600 hover:bg-amber-100 transition"
+              >
+                <FaTwitter />
+              </a>
+              <a
+                href="#"
+                className="w-10 h-10 rounded-full bg-white border border-amber-200 flex items-center justify-center text-amber-600 hover:bg-amber-100 transition"
+              >
+                <FaLinkedin />
+              </a>
+              <a
+                href="#"
+                className="w-10 h-10 rounded-full bg-white border border-amber-200 flex items-center justify-center text-amber-600 hover:bg-amber-100 transition"
+              >
+                <FaInstagram />
+              </a>
+            </div>
+
+            {/* Copyright */}
+            <p className="text-gray-600 text-sm">
+              &copy; {new Date().getFullYear()} Powerhouse Tech Solutions. All
+              rights reserved.
+            </p>
+
+            {/* Creative Element */}
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-amber-400 rounded-full animate-pulse"></div>
+              <div className="w-3 h-3 bg-amber-500 rounded-full animate-pulse delay-100"></div>
+              <div className="w-3 h-3 bg-amber-600 rounded-full animate-pulse delay-200"></div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

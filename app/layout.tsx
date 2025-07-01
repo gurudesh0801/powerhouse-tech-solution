@@ -19,10 +19,27 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Google Analytics Script */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-15YD85B1JS"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-15YD85B1JS');
+            `,
+          }}
+        />
+      </head>
       <body className={inter.className}>
-        <Navbar /> {/* Add Navbar here */}
+        <Navbar />
         <ScrollToTopButton />
-        <main className="pt-16">{children}</main> {/* Add top padding */}
+        <main className="pt-16">{children}</main>
         <Footer />
       </body>
     </html>
