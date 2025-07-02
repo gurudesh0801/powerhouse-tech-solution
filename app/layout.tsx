@@ -7,9 +7,8 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// app/layout.tsx
-
 export const metadata = {
+  metadataBase: new URL("https://powerhousetechsolutions.com"), // ✅ Fixes the warning
   title: "Powerhouse Tech Solutions",
   description: "Empowering your business with cutting-edge IT solutions.",
   keywords: [
@@ -33,7 +32,7 @@ export const metadata = {
     siteName: "Powerhouse Tech Solutions",
     images: [
       {
-        url: "/images/powerhouselogo.png", // Put this image in your public/images folder
+        url: "/images/powerhouselogo.png",
         width: 1200,
         height: 630,
         alt: "Powerhouse Tech Solutions",
@@ -76,11 +75,11 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-15YD85B1JS');
-      `,
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-15YD85B1JS');
+            `,
           }}
         />
       </head>

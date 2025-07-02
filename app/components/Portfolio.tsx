@@ -38,7 +38,7 @@ export default function Portfolio() {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-64 h-64 bg-amber-100 rounded-full blur-[80px] opacity-30"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-yellow-100 rounded-full blur-[100px] opacity-20"></div>
-        <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] opacity-[0.02]"></div>
+        <div className="absolute inset-0 bg-[url('/images/grid-pattern.png')] opacity-[0.1]"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
