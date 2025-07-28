@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
+import Link from "next/link";
 
 export default function Hero() {
   const controls = useAnimation();
@@ -255,7 +256,7 @@ export default function Hero() {
                 <span className="absolute left-0 bottom-2 w-full h-3 bg-gradient-to-r from-yellow-400/80 to-amber-400/80 -z-0"></span>
               </span>{" "}
               <span className="bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-                Digital Solutions
+                Tech Solutions
               </span>
             </motion.h1>
 
@@ -263,35 +264,40 @@ export default function Hero() {
               variants={itemVariants}
               className="text-xl text-gray-600 mb-10 max-w-lg"
             >
-              We deliver cutting-edge technology solutions that drive
-              innovation, efficiency, and growth for enterprises worldwide.
+              We craft modern IT solutions that empower businesses across India
+              to innovate, streamline operations, and scale with confidence in
+              the digital age.
             </motion.p>
 
             <motion.div
               variants={itemVariants}
               className="flex flex-wrap gap-4"
             >
-              <button className="relative px-8 py-3.5 bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-medium rounded-lg transition-all duration-300 group overflow-hidden shadow-lg hover:shadow-xl hover:shadow-amber-500/20">
-                <span className="relative z-10 flex items-center gap-2">
-                  Explore Solutions
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </span>
-                <span className="absolute inset-0 bg-gradient-to-r from-yellow-600 to-amber-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              </button>
-              <button className="px-8 py-3.5 bg-transparent border-2 border-gray-800/20 hover:border-gray-800/40 text-gray-800 hover:text-gray-900 font-medium rounded-lg transition-all duration-300 backdrop-blur-sm">
-                Contact Our Team
-              </button>
+              <Link href="/services">
+                <button className="relative px-8 py-3.5 bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-medium rounded-lg transition-all duration-300 group overflow-hidden shadow-lg hover:shadow-xl hover:shadow-amber-500/20">
+                  <span className="relative z-10 flex items-center gap-2">
+                    Explore Solutions
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-yellow-600 to-amber-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                </button>
+              </Link>
+              <Link href="/contact">
+                <button className="px-8 py-3.5 bg-transparent border-2 border-gray-800/20 hover:border-gray-800/40 text-gray-800 hover:text-gray-900 font-medium rounded-lg transition-all duration-300 backdrop-blur-sm">
+                  Contact Our Team
+                </button>
+              </Link>
             </motion.div>
           </motion.div>
         </div>

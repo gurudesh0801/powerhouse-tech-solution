@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { FaTools, FaRocket, FaBrain, FaLaptopCode } from "react-icons/fa";
 import type { ReactElement } from "react";
+import Link from "next/link";
 
 const projects: {
   id: number;
@@ -177,24 +178,28 @@ export default function ProcessShowcase() {
           </h3>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <motion.button
-              whileHover={{ y: -2, backgroundColor: "#d97706" }}
-              whileTap={{ scale: 0.98 }}
-              className="px-8 py-3.5 bg-amber-600 text-white font-medium rounded-lg transition-all duration-300"
-            >
-              Get Started
-            </motion.button>
+            <Link href="/services">
+              <motion.button
+                whileHover={{ y: -2, backgroundColor: "#d97706" }}
+                whileTap={{ scale: 0.98 }}
+                className="px-8 py-3.5 bg-amber-600 text-white font-medium rounded-lg transition-all duration-300"
+              >
+                Get Started
+              </motion.button>
+            </Link>
 
-            <motion.button
-              whileHover={{
-                y: -2,
-                backgroundColor: "rgba(255, 255, 255, 0.9)",
-              }}
-              whileTap={{ scale: 0.98 }}
-              className="px-8 py-3.5 bg-white border border-amber-300 text-gray-800 font-medium rounded-lg transition-all duration-300"
-            >
-              Schedule Consultation
-            </motion.button>
+            <Link href="/contact">
+              <motion.button
+                whileHover={{
+                  y: -2,
+                  backgroundColor: "rgba(255, 255, 255, 0.9)",
+                }}
+                whileTap={{ scale: 0.98 }}
+                className="px-8 py-3.5 bg-white border border-amber-300 text-gray-800 font-medium rounded-lg transition-all duration-300"
+              >
+                Schedule Consultation
+              </motion.button>
+            </Link>
           </div>
         </motion.div>
       </div>

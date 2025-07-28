@@ -197,14 +197,16 @@ export default function AboutPage() {
               className="space-y-6"
             >
               <p className="text-lg text-gray-600">
-                Founded in 2012, Powerhouse began as a small team of passionate
-                technologists with a vision to revolutionize how businesses
-                leverage technology.
+                Founded in 2024, Powerhouse Tech Solutions is a dynamic startup
+                driven by a passionate team of technologists committed to
+                delivering impactful IT solutions tailored for modern
+                businesses.
               </p>
               <p className="text-lg text-gray-600">
-                Today, we're a global leader in enterprise solutions, serving
-                clients across 15 countries with our innovative approach to
-                digital transformation.
+                With innovation at our core, we aim to become one of India's
+                most trusted software agencies by helping organizations of all
+                sizes accelerate their digital transformation journey with
+                scalable, efficient, and future-ready technologies.
               </p>
               <div className="grid grid-cols-2 gap-4 mt-8">
                 {stats.map((stat, index) => (

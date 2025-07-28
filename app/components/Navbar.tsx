@@ -165,7 +165,7 @@ export default function Navbar() {
                   open: { opacity: 1, y: 0 },
                   closed: { opacity: 0, y: 10 },
                 }}
-                href="tel:+1234567890"
+                href="tel:+918788098130"
                 className="flex items-center justify-center mt-4 px-4 py-3 bg-gradient-to-r from-yellow-500 to-amber-500 text-white rounded-lg font-medium hover:from-yellow-600 hover:to-amber-600 transition-colors"
               >
                 <FiPhone className="mr-2" />

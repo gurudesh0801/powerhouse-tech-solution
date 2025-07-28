@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { FiMail, FiPhone, FiMapPin, FiClock, FiSend } from "react-icons/fi";
 import { FaLinkedin, FaTwitter, FaInstagram } from "react-icons/fa";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -239,9 +240,7 @@ export default function ContactPage() {
                       <h4 className="font-medium text-gray-900">
                         Headquarters
                       </h4>
-                      <p className="text-gray-600">
-                        123 Tech Park, Pune, Maharashtra, India
-                      </p>
+                      <p className="text-gray-600">Pune, Maharashtra, India</p>
                     </div>
                   </div>
 
@@ -253,9 +252,7 @@ export default function ContactPage() {
                       <h4 className="font-medium text-gray-900">
                         Development Center
                       </h4>
-                      <p className="text-gray-600">
-                        456 Innovation Drive, Bangalore, Karnataka, India
-                      </p>
+                      <p className="text-gray-600">Pune, Maharashtra, India</p>
                     </div>
                   </div>
                 </div>
@@ -317,15 +314,19 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex items-center gap-4 pt-2">
-                    <div className="bg-amber-100 p-3 rounded-full text-amber-600">
-                      <FaLinkedin size={18} />
-                    </div>
+                    <Link href="https://www.linkedin.com/company/powerhousetechsolutions">
+                      <div className="bg-amber-100 p-3 rounded-full text-amber-600">
+                        <FaLinkedin size={18} />
+                      </div>
+                    </Link>
                     <div className="bg-amber-100 p-3 rounded-full text-amber-600">
                       <FaTwitter size={18} />
                     </div>
-                    <div className="bg-amber-100 p-3 rounded-full text-amber-600">
-                      <FaInstagram size={18} />
-                    </div>
+                    <Link href="https://www.instagram.com/powerhousetechsolutions?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
+                      <div className="bg-amber-100 p-3 rounded-full text-amber-600">
+                        <FaInstagram size={18} />
+                      </div>
+                    </Link>
                   </div>
                 </div>
               </motion.div>

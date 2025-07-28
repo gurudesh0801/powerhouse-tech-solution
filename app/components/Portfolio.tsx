@@ -15,7 +15,7 @@ const projects = [
     description:
       "Interactive patient monitoring and data visualization system.",
     image: "/images/rudraarts.png",
-    link: "#",
+    link: "https://www.rudraartsandhandicrafts.in/",
   },
   {
     title: "SyrenSynth Labs",

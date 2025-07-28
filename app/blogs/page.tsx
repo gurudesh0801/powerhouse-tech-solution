@@ -2,44 +2,45 @@
 
 import { motion } from "framer-motion";
 import { FiArrowRight, FiCalendar, FiClock, FiShare2 } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 const blogPosts = [
   {
     id: 1,
-    title: "The Future of AI in Enterprise Solutions",
+    title: "AI in 2025: From Automation to Agentic AI",
     excerpt:
-      "Exploring how artificial intelligence is transforming business operations and creating new opportunities for growth.",
+      "How AI is evolving beyond automation to autonomous decision-making systems, reshaping industries like healthcare and finance.",
     category: "AI & ML",
-    date: "May 15, 2023",
-    readTime: "5 min read",
+    date: "July 15, 2025",
+    readTime: "6 min read",
     image: "https://images.unsplash.com/photo-1677442135136-760c813a743d",
   },
   {
     id: 2,
-    title: "Building Scalable Cloud Architectures",
+    title: "Sustainable Tech: The Rise of Circular Economies",
     excerpt:
-      "Best practices for designing cloud systems that can grow with your business needs without compromising performance.",
-    category: "Cloud",
-    date: "April 28, 2023",
-    readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
+      "Companies are adopting zero-waste policies and circular supply chains to meet 2025 sustainability goals.",
+    category: "Sustainability",
+    date: "June 28, 2025",
+    readTime: "5 min read",
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3",
   },
   {
     id: 3,
-    title: "The Power of Data Visualization",
+    title: "The Hybrid Work Revolution in 2025",
     excerpt:
-      "How effective data presentation can unlock insights and drive better business decisions across your organization.",
-    category: "Data",
-    date: "April 10, 2023",
+      "Why 64% of employees now prefer flexible work models, and how companies are adapting to retain talent.",
+    category: "Future of Work",
+    date: "June 10, 2025",
     readTime: "4 min read",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f",
+    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0",
   },
 ];
-
 export default function BlogComponent() {
+  const router = useRouter();
   return (
     <section className="relative py-28 overflow-hidden bg-[#f9f7f5]">
-      {/* Background elements matching your theme */}
+      {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute inset-0 opacity-10"
@@ -118,11 +119,11 @@ export default function BlogComponent() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight"
           >
             <span className="relative inline-block">
-              <span className="relative z-10">Powerhouse</span>
+              <span className="relative z-10">2025 Industry</span>
               <span className="absolute left-0 bottom-2 w-full h-3 bg-gradient-to-r from-yellow-400/80 to-amber-400/80 -z-0"></span>
             </span>{" "}
             <span className="bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-              Blog
+              Trends
             </span>
           </motion.h2>
 
@@ -133,8 +134,8 @@ export default function BlogComponent() {
             transition={{ delay: 0.6, duration: 0.6 }}
             viewport={{ once: true }}
           >
-            Discover the latest trends, insights, and best practices in
-            technology and digital transformation.
+            Cutting-edge insights on AI, sustainability, and the future of work
+            in 2025.
           </motion.p>
         </motion.div>
 
@@ -183,7 +184,10 @@ export default function BlogComponent() {
                   <p className="text-gray-600 mb-4 flex-1">{post.excerpt}</p>
 
                   <div className="flex justify-between items-center pt-4 border-t border-gray-100">
-                    <button className="flex items-center text-amber-600 font-medium group-hover:text-amber-700 transition-colors">
+                    <button
+                      className="flex items-center text-amber-600 font-medium group-hover:text-amber-700 transition-colors"
+                      onClick={() => router.push(`/blogs/${post.id}`)}
+                    >
                       Read more
                       <FiArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
                     </button>
@@ -222,19 +226,18 @@ export default function BlogComponent() {
                 <div className="flex items-center text-sm text-gray-500 mb-3">
                   <div className="flex items-center mr-4">
                     <FiCalendar className="mr-1" />
-                    June 2, 2023
+                    July 2, 2025
                   </div>
                   <div className="flex items-center">
                     <FiClock className="mr-1" />8 min read
                   </div>
                 </div>
                 <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
-                  Digital Transformation Roadmap for 2023
+                  Quantum Computing Breakthroughs in 2025
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  A comprehensive guide to navigating digital transformation
-                  this year, with actionable insights and strategic frameworks
-                  for businesses of all sizes.
+                  How quantum computing is solving previously intractable
+                  problems in logistics, cryptography, and drug discovery.
                 </p>
                 <button className="self-start px-6 py-3 bg-gradient-to-r from-amber-500 to-yellow-500 text-white font-medium rounded-lg hover:from-amber-600 hover:to-yellow-600 transition-all duration-300 shadow-md flex items-center gap-2">
                   Read Featured Article
@@ -254,11 +257,11 @@ export default function BlogComponent() {
           className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/80 p-8 md:p-10 text-center"
         >
           <h3 className="text-2xl font-bold text-gray-800 mb-3">
-            Stay Updated with Our Latest Insights
+            Stay Ahead with Our 2025 Trends Report
           </h3>
           <p className="text-gray-600 max-w-2xl mx-auto mb-6">
-            Subscribe to our newsletter and receive the latest articles, case
-            studies, and industry news directly to your inbox.
+            Get monthly insights on AI, sustainability, and emerging
+            technologies straight to your inbox.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input
