@@ -6,28 +6,31 @@ import { Folder, ExternalLink } from "react-feather";
 const projects = [
   {
     title: "E-Learning Platform",
-    description: "A scalable online E-Learning Platform",
+    description:
+      "A scalable and user-friendly E-Learning platform built for CoachDost, enabling seamless access to digital coaching resources.",
     image: "/images/coachdost.png",
     link: "https://coachdost.com",
   },
   {
     title: "Rudra Arts",
     description:
-      "Interactive patient monitoring and data visualization system.",
+      "An elegant eCommerce platform for handcrafted artifacts, built with interactive UI and smooth customer experience.",
     image: "/images/rudraarts.png",
     link: "https://www.rudraartsandhandicrafts.in/",
   },
   {
     title: "SyrenSynth Labs",
-    description: "Custom-built website with animations",
+    description:
+      "Custom-built animated website for a biotechnology R&D startup, highlighting their innovations in sensory and neural research.",
     image: "/images/syrensynth.png",
     link: "https://serensynthlabs.com/",
   },
   {
-    title: "Fully Customize Hotel Booking Website",
-    description: "Secure finance tracking and investment portfolio app.",
-    image: "/images/hotel.png",
-    link: "#",
+    title: "Shanti Audio – Professional Sound Portfolio",
+    description:
+      "A sleek portfolio website for Shanti Audio showcasing high-quality audio production, mixing, and sound design for films, ads, and artists.",
+    image: "/images/shantiAudio.png",
+    link: "https://shanti-audio.vercel.app/",
   },
 ];
 
@@ -95,7 +98,7 @@ export default function Portfolio() {
               <div className="p-6">
                 <div className="flex items-center gap-2 text-amber-600 mb-3">
                   <Folder size={16} />
-                  <span className="text-sm font-medium">Project</span>
+                  <span className="text-sm font-medium">Client Project</span>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">
                   {project.title}
