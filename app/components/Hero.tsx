@@ -88,7 +88,7 @@ export default function Hero() {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
     >
       {/* Milky white background with subtle effects */}
       <div className="absolute inset-0 bg-[#f9f7f5] overflow-hidden">
@@ -160,7 +160,6 @@ export default function Hero() {
 
       <div className="container mx-auto px-6 py-20 z-10">
         <div className="flex flex-col lg:flex-row items-center gap-12">
-          {/* Left content - 3D card component with glass morphism */}
           <motion.div
             initial="hidden"
             animate="visible"

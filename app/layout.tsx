@@ -86,7 +86,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navbar />
         <ScrollToTopButton />
-        <main className="pt-16">{children}</main>
+        <main className="">{children}</main>
         <Footer />
       </body>
     </html>

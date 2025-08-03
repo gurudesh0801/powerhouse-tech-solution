@@ -4,6 +4,12 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiX, FiChevronRight, FiCheckCircle } from "react-icons/fi";
 
+interface ImportMeta {
+  env: {
+    NEXT_PUBLIC_WA_PHONE_NO?: string;
+  };
+}
+
 const services = [
   {
     title: "Web Development",
@@ -120,8 +126,52 @@ type Service = {
 export default function ServicesPage() {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
 
+  // Selector
+  const [step, setStep] = useState(1);
+  const [selectedOptions, setSelectedOptions] = useState({
+    goals: "",
+    timeline: "",
+    budget: "",
+    expertise: "",
+  });
+
+  const handleOptionSelect = (field: string, value: string) => {
+    setSelectedOptions((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const generateWhatsAppMessage = () => {
+    const message = `Hi! I'm interested in your services. Here are my needs:
+    
+Primary Goal: ${selectedOptions.goals}
+Timeline: ${selectedOptions.timeline}
+Budget: ${selectedOptions.budget}
+Expertise Needed: ${selectedOptions.expertise}
+
+Please contact me to discuss further.`;
+
+    return encodeURIComponent(message);
+  };
+
+  const handleSubmit = () => {
+    const phoneNumber = process.env.NEXT_PUBLIC_WA_PHONE_NO;
+    if (!phoneNumber) {
+      console.error("WhatsApp number not configured");
+      return;
+    }
+
+    const url = `https://wa.me/${phoneNumber}?text=${generateWhatsAppMessage()}`;
+    window.open(url, "_blank");
+  };
+
+  const isNextDisabled = () => {
+    if (step === 1 && !selectedOptions.goals) return true;
+    if (step === 2 && !selectedOptions.timeline) return true;
+    if (step === 3 && !selectedOptions.budget) return true;
+    return false;
+  };
+
   return (
-    <div className="bg-[#f9f7f5]">
+    <div className="bg-[#f9f7f5] overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative py-28 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
@@ -217,6 +267,221 @@ export default function ServicesPage() {
                 <div className="absolute -z-10 -bottom-2 -right-2 w-full h-full rounded-xl bg-amber-100 group-hover:bg-amber-200 transition-colors duration-300"></div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Service Selector */}
+
+      <section className="relative py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              <span className="text-amber-600">Need Help</span>{" "}
+              <span className="relative inline-block">
+                <span className="relative z-10">Choosing?</span>
+                <span className="absolute left-0 bottom-2 w-full h-3 bg-amber-200/70 -z-0"></span>
+              </span>
+            </h2>
+            <p className="text-lg text-gray-600">
+              Answer a few questions and we'll recommend the perfect services
+              for your needs
+            </p>
+          </motion.div>
+
+          <div className="bg-[#f9f7f5] p-8 rounded-xl border border-amber-100">
+            <div className="flex mb-6">
+              {[1, 2, 3, 4].map((stepNumber) => (
+                <div key={stepNumber} className="flex-1">
+                  <div
+                    className={`h-2 rounded-full ${
+                      step >= stepNumber ? "bg-amber-600" : "bg-gray-200"
+                    }`}
+                  ></div>
+                </div>
+              ))}
+            </div>
+
+            <div className="space-y-6">
+              {/* Step 1: Goals */}
+              {step === 1 && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    What are your primary goals?
+                  </h3>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {[
+                      "Build a website",
+                      "Create a mobile app",
+                      "Develop custom software",
+                      "Improve existing system",
+                      "Digital transformation",
+                      "Other",
+                    ].map((option) => (
+                      <button
+                        key={option}
+                        onClick={() => handleOptionSelect("goals", option)}
+                        className={`px-4 py-3 rounded-lg text-left transition-colors ${
+                          selectedOptions.goals === option
+                            ? "bg-amber-600 text-white border-amber-600"
+                            : "bg-white border border-gray-200 hover:border-amber-300 hover:bg-amber-50"
+                        }`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Step 2: Timeline */}
+              {step === 2 && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    What's your timeline?
+                  </h3>
+                  <div className="grid sm:grid-cols-3 gap-3">
+                    {[
+                      "Urgent (< 1 month)",
+                      "Standard (1-3 months)",
+                      "Flexible (3+ months)",
+                      "Not sure yet",
+                    ].map((option) => (
+                      <button
+                        key={option}
+                        onClick={() => handleOptionSelect("timeline", option)}
+                        className={`px-4 py-3 rounded-lg text-left transition-colors ${
+                          selectedOptions.timeline === option
+                            ? "bg-amber-600 text-white border-amber-600"
+                            : "bg-white border border-gray-200 hover:border-amber-300 hover:bg-amber-50"
+                        }`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Step 3: Budget */}
+              {step === 3 && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    What's your estimated budget?
+                  </h3>
+                  <div className="grid sm:grid-cols-3 gap-3">
+                    {[
+                      "$1,000 - $5,000",
+                      "$5,000 - $20,000",
+                      "$20,000 - $50,000",
+                      "$50,000+",
+                      "Not sure",
+                    ].map((option) => (
+                      <button
+                        key={option}
+                        onClick={() => handleOptionSelect("budget", option)}
+                        className={`px-4 py-3 rounded-lg text-left transition-colors ${
+                          selectedOptions.budget === option
+                            ? "bg-amber-600 text-white border-amber-600"
+                            : "bg-white border border-gray-200 hover:border-amber-300 hover:bg-amber-50"
+                        }`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Step 4: Expertise */}
+              {step === 4 && (
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    What level of expertise do you need?
+                  </h3>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {[
+                      "Full project development",
+                      "Consultation & strategy",
+                      "Technical leadership",
+                      "Team augmentation",
+                      "Other",
+                    ].map((option) => (
+                      <button
+                        key={option}
+                        onClick={() => handleOptionSelect("expertise", option)}
+                        className={`px-4 py-3 rounded-lg text-left transition-colors ${
+                          selectedOptions.expertise === option
+                            ? "bg-amber-600 text-white border-amber-600"
+                            : "bg-white border border-gray-200 hover:border-amber-300 hover:bg-amber-50"
+                        }`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              <div className="flex justify-between mt-8">
+                {step > 1 && (
+                  <button
+                    onClick={() => setStep(step - 1)}
+                    className="px-6 py-3 text-gray-600 font-medium rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    Back
+                  </button>
+                )}
+
+                {step < 4 ? (
+                  <button
+                    onClick={() => setStep(step + 1)}
+                    disabled={isNextDisabled()}
+                    className={`ml-auto px-6 py-3 font-medium rounded-lg transition-colors flex items-center ${
+                      isNextDisabled()
+                        ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                        : "bg-amber-600 hover:bg-amber-700 text-white"
+                    }`}
+                  >
+                    Next <FiChevronRight className="ml-1" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleSubmit}
+                    disabled={isNextDisabled()}
+                    className={`ml-auto px-6 py-3 font-medium rounded-lg transition-colors ${
+                      isNextDisabled()
+                        ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+                        : "bg-green-600 hover:bg-green-700 text-white"
+                    }`}
+                  >
+                    Chat on WhatsApp
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -378,6 +643,166 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <section className="relative py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              What Our <span className="text-amber-600">Clients</span>{" "}
+              <span className="relative inline-block">
+                <span className="relative z-10">Say</span>
+                <span className="absolute left-0 bottom-2 w-full h-3 bg-amber-200/70 -z-0"></span>
+              </span>
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                quote:
+                  "Their web development team delivered 2 weeks ahead of schedule with zero bugs.",
+                author: "Sarah K., CTO at TechStart",
+                rating: 5,
+              },
+              {
+                quote:
+                  "The mobile app they built increased our user retention by 40% in the first month.",
+                author: "Michael T., Product Lead at AppVantage",
+                rating: 5,
+              },
+              {
+                quote:
+                  "Most responsive team we've worked with. They became true partners in our growth.",
+                author: "Priya M., CEO at DesignHub",
+                rating: 5,
+              },
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-[#f9f7f5] p-8 rounded-xl border border-amber-100"
+              >
+                <div className="flex mb-4">
+                  {[...Array(5)].map((_, i) => (
+                    <svg
+                      key={i}
+                      className={`w-5 h-5 ${
+                        i < testimonial.rating
+                          ? "text-amber-400"
+                          : "text-gray-300"
+                      }`}
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-gray-700 italic mb-6">
+                  "{testimonial.quote}"
+                </p>
+                <p className="font-medium text-gray-900">
+                  {testimonial.author}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Technology Stack */}
+      <section className="relative py-20 bg-[#f9f7f5]">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Our <span className="text-amber-600">Technology</span>{" "}
+              <span className="relative inline-block">
+                <span className="relative z-10">Stack</span>
+                <span className="absolute left-0 bottom-2 w-full h-3 bg-amber-200/70 -z-0"></span>
+              </span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              We use modern, battle-tested technologies to build
+              high-performance applications
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              {
+                name: "Next.js",
+                icon: "⚡",
+                description: "Server-side rendering for blazing fast apps",
+              },
+              {
+                name: "Tailwind CSS",
+                icon: "🎨",
+                description: "Utility-first CSS for rapid UI development",
+              },
+              {
+                name: "shadcn/ui",
+                icon: "✨",
+                description: "Beautiful, accessible component library",
+              },
+              {
+                name: "MongoDB",
+                icon: "🗄️",
+                description: "Flexible NoSQL database for complex data",
+              },
+              {
+                name: "PostgreSQL",
+                icon: "🔍",
+                description: "Powerful relational database for structured data",
+              },
+              {
+                name: "Node.js",
+                icon: "🛠️",
+                description: "JavaScript runtime for scalable backends",
+              },
+              {
+                name: "TypeScript",
+                icon: "🧩",
+                description: "Type-safe JavaScript for robust code",
+              },
+              {
+                name: "React Native",
+                icon: "📱",
+                description: "Cross-platform mobile development",
+              },
+            ].map((tech, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                viewport={{ once: true }}
+                className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center"
+              >
+                <div className="text-4xl mb-4">{tech.icon}</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  {tech.name}
+                </h3>
+                <p className="text-gray-600 text-sm">{tech.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section className="relative py-20 bg-white">
         <div className="max-w-4xl mx-auto px-6">
@@ -411,6 +836,36 @@ export default function ServicesPage() {
                   {faq.question}
                 </h3>
                 <p className="text-gray-600">{faq.answer}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Result Matrices */}
+      <section className="relative py-20 bg-amber-600 text-white">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-0 w-64 h-64 bg-amber-700 rounded-full blur-[100px] opacity-20"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-amber-500 rounded-full blur-[120px] opacity-20"></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+            {[
+              { value: "10+", label: "Successful Projects" },
+              { value: "98%", label: "Client Satisfaction" },
+              { value: "4.9/5", label: "Average Rating" },
+              { value: "2x", label: "Faster Delivery" },
+            ].map((metric, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <p className="text-5xl font-bold mb-3">{metric.value}</p>
+                <p className="text-lg">{metric.label}</p>
               </motion.div>
             ))}
           </div>
