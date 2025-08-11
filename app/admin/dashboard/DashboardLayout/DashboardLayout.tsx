@@ -23,14 +23,6 @@ export default function DashboardLayout({
       >
         <div className="flex items-center justify-between p-4 border-b">
           {!collapsed && <span className="font-bold text-lg">Dashboard</span>}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setCollapsed(!collapsed)}
-            className="ml-auto"
-          >
-            {collapsed ? <Menu size={20} /> : <X size={20} />}
-          </Button>
         </div>
 
         <nav className="flex-1 p-2">
