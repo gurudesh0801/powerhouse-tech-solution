@@ -4,21 +4,39 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Lock, User, ChevronRight } from "react-feather";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your authentication logic here
-    console.log("Logging in with:", { userId, password, rememberMe });
+
+    const adminUser = process.env.NEXT_PUBLIC_ADMIN_USER;
+    const adminPass = process.env.NEXT_PUBLIC_ADMIN_PASS;
+    const adminKey = process.env.NEXT_PUBLIC_ADMIN_KEY;
+
+    if (userId === adminUser && password === adminPass) {
+      // ✅ Store in localStorage
+      localStorage.setItem(
+        "adminAuth",
+        JSON.stringify({ admin: true, key: adminKey })
+      );
+
+      // Redirect to dashboard
+      router.push("/admin/dashboard");
+    } else {
+      setError("Invalid User ID or Password");
+    }
   };
 
   return (
     <div className="min-h-screen bg-[#f9f7f5] flex items-center justify-center p-4 pt-20">
-      {/* Background elements */}
+      {/* Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-64 h-64 bg-amber-100 rounded-full blur-[80px] opacity-30"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-yellow-100 rounded-full blur-[100px] opacity-20"></div>
@@ -31,7 +49,7 @@ export default function LoginPage() {
         className="relative z-10 w-full max-w-md"
       >
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-          {/* Login Header */}
+          {/* Header */}
           <div className="bg-amber-600 p-8 text-center">
             <motion.h1
               initial={{ opacity: 0 }}
@@ -51,9 +69,10 @@ export default function LoginPage() {
             </motion.p>
           </div>
 
-          {/* Login Form */}
+          {/* Form */}
           <div className="p-8">
             <form onSubmit={handleSubmit}>
+              {/* User ID */}
               <motion.div
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -79,6 +98,7 @@ export default function LoginPage() {
                 </div>
               </motion.div>
 
+              {/* Password */}
               <motion.div
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -104,11 +124,12 @@ export default function LoginPage() {
                 </div>
               </motion.div>
 
+              {/* Remember Me */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="flex items-center justify-between mb-8"
+                className="flex items-center justify-between mb-4"
               >
                 <div className="flex items-center">
                   <input
@@ -130,6 +151,10 @@ export default function LoginPage() {
                 </Link>
               </motion.div>
 
+              {/* Error Message */}
+              {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+
+              {/* Submit Button */}
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -143,29 +168,8 @@ export default function LoginPage() {
                 />
               </motion.button>
             </form>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-              className="mt-8 text-center"
-            >
-              <p className="text-gray-600">
-                Don't have an account?{" "}
-                <Link
-                  href="/register"
-                  className="text-amber-600 hover:text-amber-700 font-medium"
-                >
-                  Sign up
-                </Link>
-              </p>
-            </motion.div>
           </div>
         </div>
-
-        {/* Floating elements */}
-        <div className="absolute -top-8 -right-8 w-32 h-32 bg-amber-600 rounded-xl shadow-lg border border-amber-200/50 transform rotate-6 z-0 opacity-20"></div>
-        <div className="absolute -bottom-6 -left-6 w-28 h-28 bg-yellow-200 rounded-xl shadow-lg border border-yellow-200/50 transform -rotate-3 z-0 opacity-20"></div>
       </motion.div>
     </div>
   );

@@ -1,10 +1,7 @@
 // app/layout.tsx
-import { Phone } from "react-feather";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
-import ScrollToTopButton from "./components/ScrollToTopButton";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import ClientLayout from "./ClientLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -141,10 +138,7 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <Navbar />
-        <ScrollToTopButton />
-        <main>{children}</main>
-        <Footer />
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

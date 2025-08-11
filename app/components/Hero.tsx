@@ -1,19 +1,65 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion, scale, useAnimation, useInView } from "framer-motion";
 import Link from "next/link";
 
 export default function Hero() {
   const controls = useAnimation();
+  const robotControls = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   useEffect(() => {
     if (isInView) {
       controls.start("visible");
+      // Robot animation sequence
+      robotControls.start("peek");
+
+      setTimeout(() => {
+        robotControls.start("rotate");
+      }, 1000); // Rotate after 3 seconds
+
+      setTimeout(() => {
+        robotControls.start("moveToChat");
+      }, 4000); // Move to chat after another 3 seconds (total 6 seconds)
     }
-  }, [isInView, controls]);
+  }, [isInView, controls, robotControls]);
+
+  const robotVariants = {
+    hidden: { opacity: 0, x: -100, rotate: 0 },
+    peek: {
+      opacity: 0,
+      x: -30,
+      y: 20,
+      rotate: 0, // Start with no rotation
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+    rotate: {
+      opacity: 1,
+      x: -30,
+      y: 20,
+      rotate: 30, // Rotate 30 degrees
+      transition: {
+        duration: 2,
+        ease: "easeInOut",
+      },
+    },
+    moveToChat: {
+      x: 850,
+      y: 300,
+      opacity: 0, // Fade out
+      rotate: 0, // Return to normal rotation
+      scale: 0.5, // Scale down
+      transition: {
+        duration: 3,
+        ease: [0.2, 0.6, 0.3, 1],
+      },
+    },
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -227,6 +273,35 @@ export default function Hero() {
               <div className="absolute -top-6 -right-6 w-32 h-32 bg-amber-200/60 rounded-xl shadow-lg border border-white/80 transform rotate-6 backdrop-blur-sm"></div>
               <div className="absolute -bottom-4 -left-4 w-28 h-28 bg-yellow-200/60 rounded-xl shadow-lg border border-white/80 transform -rotate-3 backdrop-blur-sm"></div>
             </div>
+          </motion.div>
+
+          {/* Robot animation */}
+          <motion.div
+            initial="hidden"
+            animate={robotControls}
+            variants={robotVariants}
+            className="absolute z-10"
+            style={{
+              width: "180px",
+              height: "180px",
+              bottom: "35%",
+              left: "36%",
+              transformStyle: "preserve-3d",
+              transformOrigin: "bottom center", // Rotates from bottom
+            }}
+          >
+            <motion.img
+              src="/images/robot.webp"
+              alt="Robot"
+              className="w-full h-full object-contain"
+              animate={robotControls}
+              variants={{
+                hidden: { opacity: 0, rotate: 0 },
+                peek: { opacity: 1, rotate: 0 },
+                rotate: { opacity: 1, rotate: 10 },
+                moveToChat: { opacity: 1, rotate: 0 },
+              }}
+            />
           </motion.div>
 
           {/* Right content - Text content */}
